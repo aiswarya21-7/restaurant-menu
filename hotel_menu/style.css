@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
+/* Reset & base */
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial}
+a{color:inherit;text-decoration:none}
+.muted{color:rgba(255,255,255,0.9)}
+.small{font-size:0.9rem}
+
+/* Background for all pages (images/bg.jpg) */
+.bg{
+  background-image: url('images/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height:100vh;
+  color:#111;
+}
+
+/* Title (Chopin Script) */
+.title{
+  font-family: 'flamingo', cursive;
+  color: #fff;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+.title.spaced{letter-spacing:8px;font-size:44px}
+.title.small{font-size:30px}
+
+/* layout helpers */
+.center-col{display:flex;flex-direction:column;align-items:center;justify-content:center;height:85vh;padding:20px;text-align:center}
+.quote{color:#ea4007;font-size:20px;margin-top:6px;margin-bottom:22px}
+
+/* Buttons */
+.btn{display:inline-block;padding:10px 16px;border-radius:10px;background:rgba(255,255,255,0.95);border:none;cursor:pointer;font-weight:700;margin-left:8px}
+.btn.primary{background:#ff5a3c;color:#fff}
+
+/* Topbar */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;gap:20px}
+
+/* Table select */
+.table-select{display:flex;align-items:center;gap:10px}
+.table-select select{padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.12)}
+
+/* main content container */
+.content{max-width:1100px;margin:12px auto;padding:8px}
+
+/* === MENU: long vertical cards === */
+.menu-list{display:flex;flex-direction:column;gap:14px;padding:8px}
+.menu-card{
+  display:flex;align-items:center;gap:18px;background:rgba(255,255,255,0.95);border-radius:14px;padding:14px;
+  transform: translateY(60px);opacity:0; /* will animate in by JS stagger */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+.menu-card img{width:160px;height:110px;object-fit:cover;border-radius:10px}
+.item-info{flex:1;text-align:left}
+.item-info h3{margin:0 0 6px;font-size:20px}
+.item-info .price{font-weight:700;color:#ff5a3c;margin-bottom:8px}
+.add-row{display:flex;align-items:center;gap:8px}
+.add-button{padding:8px 12px;border-radius:8px;border:none;background:#ff5a3c;color:#fff;cursor:pointer;font-weight:700}
+
+/* reveal class toggled by JS for smooth appearance */
+.reveal{animation:slideUp .55s forwards ease-out}
+@keyframes slideUp{to{transform:translateY(0);opacity:1}}
+
+/* === Cart (hidden until first add) === */
+.cart-section{margin-top:26px;background:rgba(0,0,0,0.78);color:#fff;padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.45)}
+.hidden{display:none}
+.cart-items{list-style:none;padding:0;margin:8px 0 12px}
+.cart-item{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px dashed rgba(255,255,255,0.06)}
+.cart-item .left{display:flex;align-items:center;gap:10px}
+.cart-item img{width:64px;height:44px;object-fit:cover;border-radius:8px}
+.qty-controls{display:flex;gap:8px;align-items:center}
+.qty-btn{padding:6px 10px;border-radius:8px;border:none;background:#fff;color:#111;cursor:pointer;font-weight:700}
+.cart-summary{display:flex;justify-content:space-between;margin-top:10px}
+.cart-total{display:flex;justify-content:space-between;font-weight:800;margin-top:8px;font-size:1.05rem}
+.cart-actions{display:flex;gap:8px;margin-top:12px}
+.cart-note{color:rgba(255,255,255,0.85);font-size:0.9rem;margin-top:8px}
+
+/* === Staff orders === */
+.orders-list{display:flex;flex-direction:column;gap:12px}
+.order-card{background:rgba(255,255,255,0.95);padding:12px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,0.12)}
+.order-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.order-items{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.order-item-row{display:flex;align-items:center;gap:12px}
+.order-item-row img{width:80px;height:60px;object-fit:cover;border-radius:8px}
+.order-total{margin-top:10px;font-weight:700}
+.order-card.delivered{opacity:0.6;filter:grayscale(0.4)}
+
+/* responsive */
+@media (max-width:900px){
+  .topbar{flex-direction:column;align-items:flex-start;gap:10px}
+  .menu-card{flex-direction:column;align-items:flex-start}
+  .menu-card img{width:100%;height:180px}
+}
+/* Center the table selector under restaurant name */
+.column-center {
+  flex-direction: column;
+  text-align: center;
+  gap: 12px;
+}
+
+.centered-select {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.table-select select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 2px solid #c67512;
+  background: #e25403;
+  color: rgb(24, 11, 11);
+  font-weight: bold;
+  cursor: pointer;
+}
+.table-select select:hover {
+  transform: scale(1.05);
+  transition: .2s;
+}
+.title {
+  font-family: "Marcellus", serif !important;
+  font-size: 45px;
+  letter-spacing: 3px;
+  text-align: center;
+  color: hsla(16, 93%, 35%, 0.916); /* warm attractive gold shade */
+  text-shadow: 2px 2px 12px rgba(85, 15, 15, 0.5);
+  font-weight: bold;
+}
+#invoiceSection {
+  background-color: rgb(204, 198, 198);
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  margin: 20px auto;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+}
+.quote {
+  color: #9c9905; /* Change to your preferred color */
+  font-size: 20px;
+  margin-top: 6px;
+  margin-bottom: 22px;
+}
+

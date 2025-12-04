@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Staff Dashboard — INFERNO Restaurant</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://fonts.cdnfonts.com/css/chopin-script" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Small inline client-side staff functions
+    function loadStaff() {
+      const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+      const root = document.getElementById('ordersList');
+      root.innerHTML = '';
+      if (!orders.length) {
+        root.innerHTML = '<p class="muted">No orders yet.</p>';
+        return;
+      }
+
+      orders.forEach((order, idx) => {
+        const card = document.createElement('div');
+        card.className = 'order-card' + (order.delivered ? ' delivered' : '');
+        card.innerHTML = `
+          <div class="order-head">
+            <div>
+              <strong>Order ID:</strong> ${order.id}<br>
+              <strong>Table:</strong> ${order.table}<br>
+              <small class="muted">${new Date(order.createdAt).toLocaleString()}</small>
+            </div>
+            <div style="text-align:right">
+              <button class="btn" onclick="removeOrder(${idx})">Remove</button>
+              <button class="btn primary" onclick="toggleDelivered(${idx})">${order.delivered ? '✔ Delivered' : 'Mark Delivered'}</button>
+            </div>
+          </div>
+
+          <div class="order-items">
+            ${order.items.map(it => `
+              <div class="order-item-row">
+                <img src="images/${it.img}" alt="${it.name}">
+                <div class="oi-name">${it.name} × ${it.qty}</div>
+                <div class="oi-price">₹${it.qty * it.price}</div>
+              </div>`).join('')}
+          </div>
+
+          <div class="order-total"><strong>Total:</strong> ₹${order.totals.total}</div>
+        `;
+        root.appendChild(card);
+      });
+    }
+
+    function toggleDelivered(i) {
+      const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+      if (!orders[i]) return;
+      orders[i].delivered = !orders[i].delivered;
+      localStorage.setItem('orders', JSON.stringify(orders));
+      loadStaff();
+    }
+
+    function removeOrder(i) {
+      let orders = JSON.parse(localStorage.getItem('orders') || '[]');
+      orders.splice(i, 1);
+      localStorage.setItem('orders', JSON.stringify(orders));
+      loadStaff();
+    }
+
+    window.addEventListener('DOMContentLoaded', loadStaff);
+  </script>
+</head>
+<body class="bg staff-page">
+
+  <header class="topbar">
+    <h1 class="title spaced small">INFERNO &nbsp; RESTAURANT</h1>
+    <p class="muted small">Staff Dashboard</p>
+  </header>
+
+  <main class="content">
+    <section id="ordersList" class="orders-list"></section>
+  </main>
+
+</body>
+</html>
